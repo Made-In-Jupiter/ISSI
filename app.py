@@ -22,21 +22,28 @@ def chatbot():
 def info():
     return render_template("info.html")
 
-# Ruta del chatbot con contexto
 @app.route('/respuesta', methods=['POST'])
 def respuesta():
     mensaje_usuario = request.json.get("mensaje")
-    api_key = os.getenv("OPENROUTER_API_KEY")
+    
+    # Puedes poner aquí tu API Key directamente para pruebas locales
+    api_key = "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"
 
-    if not api_key:
-        return jsonify({"respuesta": "Falta la API KEY de OpenRouter"}), 500
-
-    # Inicializa historial si no existe
-    if 'historial' not in session:
-        session['historial'] = [{"role": "system", "content": "Eres un guía experto del Museo Nacional de Arte que contesta preguntas de los visitantes."}]
-
-    # Añadir mensaje del usuario
-    session['historial'].append({"role": "user", "content": mensaje_usuario})
+    instrucciones = [
+        "Eres un guía experto del Museo de Arte Moderno.",
+        "Responde con claridad, pocas palabras y tono amable.",
+        "Puedes responder sobre: ubicación, precios, horarios, disponibilidad y datos del museo, sí solo sí eres preguntado sobre ello.",
+        "Si no sabes algo, responde con sinceridad y evita inventar.",
+        "No hables de política, medicina ni temas no relacionados al museo.",
+        "Evita repetir frases innecesarias como 'como modelo de lenguaje...'."
+    ]
+    
+    system_prompt = "\n".join(instrucciones)
+    
+    mensajes = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": mensaje_usuario}
+    ]
 
     try:
         respuesta_api = requests.post(
@@ -46,20 +53,19 @@ def respuesta():
                 "Content-Type": "application/json"
             },
             json={
-                "model": "mistral/mistral-7b-instruct",
-                "messages": session['historial']
+                "model": "mistralai/mistral-7b-instruct",
+                "messages": mensajes
             }
         )
 
-        datos = respuesta_api.json()
-
-        if "choices" not in datos:
-            return jsonify({"respuesta": "Error en la respuesta del modelo"}), 500
-
-        contenido_respuesta = datos["choices"][0]["message"]["content"]
-        session['historial'].append({"role": "assistant", "content": contenido_respuesta})
-
-        return jsonify({"respuesta": contenido_respuesta})
+        if respuesta_api.status_code == 200:
+            contenido = respuesta_api.json()["choices"][0]["message"]["content"]
+            return jsonify({"respuesta": contenido})
+        else:
+            return jsonify({"respuesta": f"Error {respuesta_api.status_code}: {respuesta_api.text}"}), 500
 
     except Exception as e:
         return jsonify({"respuesta": f"Error al conectar con OpenRouter: {str(e)}"}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
