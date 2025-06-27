@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escáner QR - Museo Nacional de Antropología</title> <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo-museo.png') }}" alt="Logo del Museo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/" >INICIO</a></li>
+                    <li><a href="/info" >INFORMES</a></li>
+                    <li><a href="/chatbot" >CHAT BOT</a></li>
+                    <li><a href="https://munal.mx/es">EXPOSICIONES</a></li>
+                    <li><a href="https://munal.mx/es">EL MUSEO</a></li>
+
+                </ul>
+            </nav>
+            <div class="social-icons">
+                <a href="https://www.youtube.com/watch?v=Hyc9JHUsp9E" target="_blank" aria-label="Canal de YouTube del Museo"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/munal.inba/" target="_blank" aria-label="Página de Facebook del Museo"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/munalmx/" target="_blank" aria-label="Perfil de Instagram del Museo"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/munalmx?s=21" target="_blank" aria-label="Perfil de Twitter del Museo"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding-top: 100px; text-align: center;"> <h1 class="qr-page-title">Escanea un Código QR</h1>
+        
+        <video id="video" class="qr-video-stream" autoplay playsinline></video>
+        
+        <canvas id="canvas" class="qr-canvas-hidden"></canvas>
+        
+        <div id="output" class="qr-output-container">
+            <p id="qr-result" class="qr-result-text">Escanea un código QR para obtener información.</p>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.min.js"></script>
+        <script>
+            const videoElement = document.getElementById("video");
+            const canvasElement = document.getElementById("canvas");
+            const qrResultElement = document.getElementById("qr-result");
+            const canvasContext = canvasElement.getContext("2d");
+
+            // Iniciar la cámara
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+                .then(stream => {
+                    videoElement.srcObject = stream;
+                    videoElement.play(); // Asegúrate de que el video empiece a reproducirse
+                    // Asegúrate de que el canvas tenga el tamaño correcto una vez que el video cargue
+                    videoElement.addEventListener('loadedmetadata', () => {
+                        canvasElement.width = videoElement.videoWidth;
+                        canvasElement.height = videoElement.videoHeight;
+                        scanQRCode(); // Inicia el escaneo una vez que el video está listo
+                    });
+                })
+                .catch(error => {
+                    console.error("Error al acceder a la cámara:", error);
+                    qrResultElement.textContent = "Error: No se pudo acceder a la cámara. Verifica permisos.";
+                    alert("No se pudo acceder a la cámara. Verifica permisos y configuración.");
+                });
+
+            // Mapeo de datos del QR (Ajusta este mapeo con tus datos reales de piezas)
+            const qrMap = {
+                "pieza_1": {
+                    text: "Esta es la descripción detallada de la Pieza 1. Proviene de la cultura Olmeca y data del año 1200 a.C."
+                },
+                "pieza_2": {
+                    text: "La Pieza 2 es un artefacto Zapoteca, conocido por su intrincado grabado y su significado ritual."
+                },
+                "pieza_3": {
+                    text: "Descubre la historia de la Pieza 3, un objeto de la cultura Maya utilizado en ceremonias importantes."
+                }
+                // Agrega más entradas según tus QR codes
+            };
+
+            function scanQRCode() {
+                if (videoElement.readyState === videoElement.HAVE_SOMETADATA || videoElement.readyState === videoElement.HAVE_ENOUGH_DATA) {
+                    canvasContext.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+                    const imageData = canvasContext.getImageData(0, 0, canvasElement.width, canvasElement.height);
+
+                    const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
+
+                    if (qrCode) {
+                        // Resalta el área del QR (opcional, para depuración visual)
+                        drawLine(qrCode.location.topLeftCorner, qrCode.location.topRightCorner, "#FF3B58");
+                        drawLine(qrCode.location.topRightCorner, qrCode.location.bottomRightCorner, "#FF3B58");
+                        drawLine(qrCode.location.bottomRightCorner, qrCode.location.bottomLeftCorner, "#FF3B58");
+                        drawLine(qrCode.location.bottomLeftCorner, qrCode.location.topLeftCorner, "#FF3B58");
+
+                        const qrText = normalizeText(qrCode.data); // Normaliza el texto escaneado
+                        console.log("Texto escaneado (original):", qrCode.data);
+                        console.log("Texto escaneado (normalizado):", qrText);
+
+                        const qrData = qrMap[qrText];
+                        if (qrData) {
+                            qrResultElement.textContent = qrData.text; // Mostrar texto
+                        } else {
+                            qrResultElement.textContent = "⚠️ Código QR no reconocido en nuestra base de datos. Asegúrate de escanear un QR válido del museo.";
+                            console.log("QR no encontrado en el mapeo:", qrText);
+                        }
+                    } else {
+                        // Solo muestra el mensaje predeterminado si no hay QR detectado
+                        qrResultElement.textContent = "Escanea un código QR para obtener información.";
+                    }
+                }
+                requestAnimationFrame(scanQRCode);
+            }
+
+            // Función auxiliar para dibujar líneas (para depuración visual del QR)
+            function drawLine(begin, end, color) {
+                canvasContext.beginPath();
+                canvasContext.moveTo(begin.x, begin.y);
+                canvasContext.lineTo(end.x, end.y);
+                canvasContext.lineWidth = 4;
+                canvasContext.strokeStyle = color;
+                canvasContext.stroke();
+            }
+
+            // Función para normalizar el texto del QR
+            function normalizeText(text) {
+                return text
+                    .trim()
+                    .toLowerCase()
+                    .normalize("NFD") // Elimina tildes y diacríticos
+                    .replace(/[\u0300-\u036f]/g, "") // Elimina los caracteres diacríticos restantes
+                    .replace(/\s+/g, "_"); // Reemplaza espacios con guiones bajos (si es tu convención)
+            }
+        </script>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2025 Museo Nacional de Arte. Todos los derechos reservados.</p>
+        <p>Desarrollado por el equipo de IA ESCOM.</p>
+    </footer>
+</body>
+</html>

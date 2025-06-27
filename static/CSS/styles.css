@@ -1,0 +1,863 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e2e2e2be;
+    color: #272626;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Header */
+header {
+    background-color: rgba(255, 253, 253, 0.862);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(247, 239, 239, 0.743);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+header .logo img {
+    height: 100px;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 25px;
+}
+
+nav ul li a {
+    display: block;
+    color: #454545;
+    text-decoration: none;
+    font-size: 0.95em;
+    font-weight: bold;
+    padding: 10px 0;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+nav ul li a:hover {
+    color: #a0a0a0;
+    font-size: 1.1em;
+}
+
+.social-icons a {
+    color: #393030;
+    font-size: 1.4em;
+    margin-left: 18px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #838080;
+    font-size: 1.6em;
+}
+
+/* Main */
+.home-main {
+    padding-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Caja que agrupa imagen izquierda - botones - imagen derecha */
+.box-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+/* Cada caja (imagen izquierda, botones, imagen derecha) ocupa el mismo espacio */
+.box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 40px;
+    box-sizing: border-box;
+}
+
+/* Botones centrados verticalmente */
+.interactive-elements {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding-top: 180px;
+}
+
+/* Botones */
+.interactive-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e2e2e2be;
+    color: #393030;
+    text-decoration: none;
+    padding: 18px 40px;
+    border-radius: 12px;
+    border: 2px solid #393030;
+    font-size: 1.35em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+
+.interactive-button i {
+    font-size: 1.2em;
+    margin-right: 20px;
+    color: #393030;
+}
+
+.interactive-button span {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.interactive-button:hover {
+    background-color: #e2e2e2da;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Imágenes */
+.decorative-images {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    height: 0; /* Para que no ocupe espacio visual, las imágenes serán absolutas */
+}
+
+.decorative {
+    position: absolute;
+    top: 150px; /* Ajusta según el diseño */
+    width: 400px;
+    height: auto;
+    z-index: 0;
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.decorative.left {
+    left: 20px;
+}
+
+.decorative.right {
+    right: 20px;
+}
+
+.footer {
+    text-align: center;
+    padding: 5px;
+    font-size: 0.9rem;
+    color: #aaa; /* letra más clara */
+    background-color: #f4f4f4; 
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+/* Transición de imágenes si se quiere animación */
+@keyframes imageTransition {
+    0% { opacity: 0; }
+    25% { opacity: 1; }
+    50% { opacity: 1; }
+    75% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.decorative-img:nth-child(1) {
+    animation: imageTransition 6s infinite;
+}
+
+.decorative-img:nth-child(2) {
+    animation: imageTransition 6s 2s infinite;
+}
+/* Título principal de la página QR */
+.qr-page-title { /* Añade esta clase a tu h1 en qr.html: <h1 class="qr-page-title"> */
+    color: #272626; /* Color de texto oscuro para consistencia */
+    font-size: 2.5em; /* Un poco más grande para destacar */
+    margin: 40px 0 30px; /* Más espacio vertical */
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding-top: 50px;
+}
+
+/* Estilo para el video de la cámara */
+video.qr-video-stream { /* Añade esta clase a tu video en qr.html: <video class="qr-video-stream"> */
+    width: 90%; /* Un poco más ancho */
+    max-width: 500px; /* Aumenta el tamaño máximo */
+    margin: 20px auto;
+    border: 2px solid #393030; /* Borde oscuro consistente con los botones */
+    border-radius: 12px; /* Bordes más redondeados */
+    display: block;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+    background-color: #f0f0f0; /* Fondo claro para el video si no hay stream */
+}
+
+/* Canvas oculto (mantener oculto) */
+canvas.qr-canvas-hidden { /* Añade esta clase a tu canvas en qr.html: <canvas class="qr-canvas-hidden"> */
+    display: none;
+}
+
+/* Contenedor de salida del resultado QR */
+#output.qr-output-container { /* Añade esta clase a tu div #output en qr.html: <div id="output" class="qr-output-container"> */
+    margin: 10px auto;
+    padding: 10px; /* Más padding */
+    width: 90%;
+    max-width: 500px;
+    background-color: #fdfdfd; /* Fondo muy claro */
+    border: 1px solid #d6d6d6da; /* Borde sutil */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    text-align: left; /* Alinea el texto a la izquierda dentro del contenedor */
+}
+
+/* Texto del resultado QR */
+#qr-result.qr-result-text { /* Añade esta clase a tu p #qr-result en qr.html: <p id="qr-result" class="qr-result-text"> */
+    font-size: 1.0em; /* Un poco más grande */
+    color: #272626; /* Texto oscuro para consistencia */
+    margin-bottom: 5px;
+    line-height: 1.5; /* Mejora la legibilidad */
+}
+
+/* Botón (si lo usas en la página QR) */
+button.qr-button { /* Añade esta clase a tu botón en qr.html: <button class="qr-button"> */
+    padding: 12px 25px;
+    font-size: 1.1em;
+    color: #393030; /* Texto oscuro */
+    background-color: #e2e2e2be; /* Fondo claro consistente */
+    border: 1px solid #393030; /* Borde oscuro */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top: 20px; /* Espacio superior si está debajo de otros elementos */
+}
+
+button.qr-button:hover {
+    background-color: #d6d6d6da; /* Fondo ligeramente más oscuro al pasar el mouse */
+    transform: translateY(-2px); /* Pequeño efecto de elevación */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Sombra ligeramente más grande */
+}
+
+/* --- Estilos Específicos para la Página del Chatbot --- */
+
+.chatbot-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px; /* Espacio para el header fijo */
+    min-height: calc(100vh - 100px); /* Ocupa el resto de la altura de la vista */
+    background-color: #e2e2e2be; /* Fondo consistente */
+    color: #272626; /* Color de texto principal */
+    padding-bottom: 20px; /* Espacio al final */
+    box-sizing: border-box; /* Incluir padding en el tamaño */
+}
+
+.chatbot-title {
+    color: #272626;
+    font-size: 2.5em;
+    margin: 30px 0 20px;
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding-top: 40px;
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 700px; /* Ancho máximo para el chatbox */
+    height: 35vh; /* Altura que ocupa la ventana de chat (ajusta si es necesario) */
+    background-color: #fdfdfd; /* Fondo claro para el chat */
+    border: 1px solid #d6d6d6da;
+    border-radius: 12px;
+    padding: 20px;
+    overflow-y: auto; /* Permite desplazamiento si el contenido es muy largo */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre mensajes */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    scroll-behavior: smooth; /* Desplazamiento suave */
+}
+
+.message {
+    padding: 12px 18px;
+    border-radius: 20px;
+    max-width: 75%; /* Máximo ancho del mensaje */
+    line-height: 1.4;
+    word-wrap: break-word; /* Rompe palabras largas */
+}
+
+.message.user {
+    background-color: #393030; /* Azul para mensajes del usuario */
+    color: #fff;
+    align-self: flex-end; /* Alinea a la derecha */
+    border-bottom-right-radius: 5px; /* Esquina más recta */
+}
+
+.message.bot {
+    background-color: #e2e2e2; /* Gris claro para mensajes del bot */
+    color: #272626;
+    align-self: flex-start; /* Alinea a la izquierda */
+    border-bottom-left-radius: 5px; /* Esquina más recta */
+}
+
+.chat-input-area {
+    display: flex;
+    width: 90%;
+    max-width: 700px;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fdfdfd; /* Fondo para el área de input */
+    border: 1px solid #d6d6d6da;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.chat-input {
+    flex-grow: 1; /* Ocupa todo el espacio disponible */
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: #fff;
+    color: #272626;
+    outline: none; /* Quitar el contorno al enfocar */
+    transition: border-color 0.3s ease;
+}
+
+.chat-input:focus {
+    border-color: #393030; /* Borde azul al enfocar */
+}
+
+.chat-send-button {
+    padding: 12px 20px;
+    background-color: #393030; /* Color primario para el botón */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chat-send-button:hover {
+    background-color: #191616; /* Color más oscuro al pasar el mouse */
+    transform: translateY(-2px);
+}
+
+.chat-send-button i {
+    font-size: 1.1em;
+}
+
+/* --- Estilos Específicos para la Página de Información --- */
+
+.info-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px; /* Espacio para el header fijo */
+    min-height: calc(100vh - 100px);
+    background-color: #e2e2e2be;
+    color: #272626;
+    padding-bottom: 40px; /* Espacio al final de la página */
+    box-sizing: border-box;
+}
+
+.info-page-title {
+    color: #272626;
+    font-size: 2.5em;
+    margin: 30px 0 20px;
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    padding-top: 40px;
+}
+
+/* Estilos para el carrusel de imágenes (reemplazo de <marquee>) */
+.image-carousel {
+    width: 100%;
+    max-width: 1000px; /* Ancho máximo del carrusel */
+    overflow: hidden; /* Oculta las imágenes fuera de la vista */
+    margin: 30px auto 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: #fdfdfd;
+}
+
+.carousel-track {
+    display: flex;
+    animation: scrollImages 25s linear infinite; /* Duración de la animación */
+}
+
+.carousel-image {
+    width: 300px; /* Ancho fijo de cada imagen en el carrusel */
+    height: 200px; /* Altura fija de cada imagen */
+    object-fit: cover; /* Recorta la imagen para que cubra el espacio */
+    flex-shrink: 0; /* Evita que las imágenes se encojan */
+    margin-right: 15px; /* Espacio entre imágenes */
+    border-radius: 8px; /* Bordes redondeados para las imágenes */
+}
+
+/* Animación de scroll infinito para el carrusel */
+@keyframes scrollImages {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Se desplaza la mitad del ancho total del track */
+    }
+}
+
+/* Sección de información principal */
+.museum-info-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas responsivas */
+    gap: 30px; /* Espacio entre los bloques de información */
+    width: 90%;
+    max-width: 1200px;
+    margin-bottom: 40px;
+}
+
+.info-block {
+    background-color: #fdfdfd;
+    border: 1px solid #d6d6d6da;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea contenido al inicio */
+}
+
+.info-subtitle {
+    color: #393030; /* Color de acento para los subtítulos */
+    font-size: 1.6em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre icono y texto */
+}
+
+.info-subtitle i {
+    font-size: 1.2em;
+    color: #272626; /* Color del icono */
+}
+
+.info-block p {
+    font-size: 1.05em;
+    line-height: 1.6;
+    color: #454545;
+    margin-bottom: 10px;
+}
+
+/* Sección del mapa */
+.museum-map-section {
+    width: 90%;
+    max-width: 1200px;
+    background-color: #fdfdfd;
+    border: 1px solid #d6d6d6da;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    text-align: center; /* Centra el mapa */
+}
+
+.museum-map-section .info-subtitle { /* Estilo para el subtítulo del mapa */
+    margin-bottom: 20px;
+    justify-content: center; /* Centra el icono y texto del subtítulo del mapa */
+}
+
+.museum-map-section iframe {
+    border-radius: 8px; /* Bordes redondeados para el mapa */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Sección de Introducción del Museo (index.html) --- */
+.museum-intro-section {
+    background-color: #fdfdfd; /* Fondo claro para la sección */
+    padding: 10px;
+    margin-top: 80px;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05); /* Sombra superior sutil */
+    border-radius: 12px;
+    
+}
+
+.intro-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px; /* Espacio entre el texto y la imagen */
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Permite que los elementos se apilen en pantallas pequeñas */   
+}
+
+.intro-text {
+    flex: 1; /* Permite que ocupe el espacio disponible */
+    min-width: 300px; /* Ancho mínimo para el texto */
+    max-width: 600px; /* Ancho máximo para el texto */
+    text-align: left;
+}
+
+.section-title {
+    color: #272626;
+    font-size: 2.6em;
+    font-weight: bold;
+    margin-bottom: 25px;
+    line-height: 1.2;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.intro-text p {
+    font-size: 1.0em;
+    line-height: 1.7;
+    color: #454545;
+    margin-bottom: 20px;
+}
+
+.intro-image {
+    flex-shrink: 0; /* Evita que la imagen se encoja */
+    width: 450px; /* Ancho fijo para la imagen */
+    height: 300px; /* Altura fija para la imagen */
+    border-radius: 15px;
+    overflow: hidden; /* Asegura que la imagen no se salga si es más grande */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.museum-promo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para que cubra el contenedor */
+    display: block; /* Elimina espacio extra debajo de la imagen */
+    transition: transform 0.3s ease;
+}
+
+.museum-promo-image:hover {
+    transform: scale(1.05); /* Pequeño zoom al pasar el mouse */
+}
+
+/* Media Queries para la sección de introducción */
+@media (max-width: 992px) {
+    .intro-content-wrapper {
+        flex-direction: column; /* Apila el texto y la imagen */
+        text-align: center; /* Centra el texto cuando está apilado */
+        gap: 30px;
+    }
+    .section-title {
+        font-size: 2.2em;
+    }
+    .intro-text p {
+        font-size: 1.05em;
+    }
+    .explore-button {
+        margin: 20px auto 0; /* Centra el botón si el texto está centrado */
+    }
+    .intro-image {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        max-width: 500px; /* Pero con un máximo */
+        height: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .museum-intro-section {
+        padding: 40px 15px;
+    }
+    .section-title {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    .intro-text p {
+        font-size: 1em;
+    }
+    .intro-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.6em;
+        margin-bottom: 15px;
+    }
+    .intro-text p {
+        font-size: 0.95em;
+    }
+    .explore-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+    .intro-image {
+        height: 200px;
+        border-radius: 10px;
+    }
+}
+
+/* Media Queries para responsividad de la página de información */
+@media (max-width: 992px) {
+    .image-carousel {
+        max-width: 800px;
+    }
+    .carousel-image {
+        width: 250px;
+        height: 180px;
+    }
+    .museum-info-section {
+        grid-template-columns: 1fr; /* Una sola columna en tablets */
+        padding: 0 20px;
+    }
+    .info-block {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-page-title {
+        font-size: 2em;
+    }
+    .image-carousel {
+        margin-top: 20px;
+    }
+    .carousel-image {
+        width: 200px;
+        height: 150px;
+        margin-right: 10px;
+    }
+    .museum-info-section,
+    .museum-map-section {
+        width: 95%; /* Ocupa más ancho en móviles */
+        padding: 15px;
+        margin-bottom: 30px;
+    }
+    .info-subtitle {
+        font-size: 1.4em;
+        margin-bottom: 10px;
+    }
+    .info-block p {
+        font-size: 1em;
+    }
+    .museum-map-section iframe {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-page-title {
+        font-size: 1.8em;
+        margin: 20px 0 15px;
+    }
+    .carousel-image {
+        width: 180px;
+        height: 120px;
+    }
+    .info-subtitle {
+        font-size: 1.2em;
+        gap: 8px;
+    }
+    .info-block p {
+        font-size: 0.95em;
+    }
+}
+
+
+/* Media Queries para responsividad del Chatbot */
+@media (max-width: 768px) {
+    .chatbot-title {
+        font-size: 2em;
+    }
+    .chat-container,
+    .chat-input-area {
+        width: 95%; /* Ocupa más ancho en pantallas pequeñas */
+        max-width: none; /* Eliminar restricción de max-width */
+    }
+    .chat-container {
+        height: 65vh; /* Puede ser un poco más alto en móviles */
+    }
+    .message {
+        max-width: 85%; /* Mensajes pueden ser más anchos */
+        padding: 10px 15px;
+    }
+    .chat-input {
+        padding: 10px 12px;
+        font-size: 0.95em;
+    }
+    .chat-send-button {
+        padding: 10px 15px;
+        font-size: 0.95em;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chatbot-title {
+        font-size: 1.8em;
+        margin: 20px 0;
+    }
+    .chat-container {
+        height: 70vh; /* Más altura en pantallas muy pequeñas */
+    }
+    .chat-send-button span {
+        display: none; /* Oculta el texto "Enviar" en pantallas muy pequeñas, solo deja el icono */
+    }
+    .chat-send-button {
+        padding: 10px; /* Solo padding para el icono */
+    }
+}
+/* Media Queries para la página QR (ajusta si es necesario) */
+@media (max-width: 768px) {
+    .qr-page-title {
+        font-size: 2em;
+    }
+    video.qr-video-stream,
+    #output.qr-output-container {
+        width: 95%;
+        max-width: none; /* Permite que ocupe casi todo el ancho disponible */
+    }
+    #output.qr-output-container {
+        padding: 15px;
+    }
+    #qr-result.qr-result-text {
+        font-size: 1em;
+    }
+    button.qr-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
+/* Responsivo */
+@media (max-width: 1024px) {
+    .header-content {
+        padding: 15px 30px;
+    }
+
+    nav ul {
+        gap: 15px;
+    }
+
+    nav ul li a {
+        font-size: 0.9em;
+    }
+
+    .interactive-button {
+        font-size: 1.2em;
+        padding: 18px 30px;
+    }
+
+    .interactive-button i {
+        font-size: 1.5em;
+        margin-right: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        padding: 15px 20px;
+        align-items: flex-start;
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .social-icons {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .social-icons a {
+        margin: 0 10px;
+    }
+
+    .home-main {
+        padding-top: 120px;
+    }
+
+    .box-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .box {
+        width: 100%;
+        justify-content: center;
+        padding-top: 20px;
+    }
+
+    .interactive-button {
+        flex-direction: column;
+        font-size: 1.1em;
+        padding: 15px 20px;
+        max-width: 350px;
+    }
+
+    .interactive-button i {
+        margin-right: 0;
+        margin-bottom: 10px;
+        font-size: 1.4em;
+    }
+
+    .decorative-img {
+        max-height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .interactive-button {
+        font-size: 1em;
+        padding: 12px 15px;
+        max-width: 300px;
+    }
+
+    .interactive-button i {
+        font-size: 1.2em;
+    }
+}

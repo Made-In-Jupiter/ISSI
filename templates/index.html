@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museo Nacional de Antropología</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo-museo.png') }}" alt="Logo del Museo">
+            </div>
+            <nav class="nav-links">
+                <ul>
+                    
+                    <li><a href="https://munal.mx/es/exposiciones">EXPOSICIONES</a></li>
+                    <li><a href="https://munal.mx/es">EL MUSEO</a></li>
+
+                </ul>
+            </nav>
+            <div class="social-icons">
+                <a href="https://www.youtube.com/watch?v=Hyc9JHUsp9E"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/munal.inba/"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/munalmx/"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/munalmx?s=21"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="home-main">
+        <div class="interactive-elements">
+            <a href="/qr" class="interactive-button">
+                <i class="fas fa-qrcode"></i>
+                <span>Escanea el código QR de una pieza</span>
+            </a>
+            <a href="/chatbot" class="interactive-button">
+                <i class="fas fa-robot"></i>
+                <span>¡Adelante! Pregúntame lo que quieras</span>
+            </a>
+            <a href="/info" class="interactive-button">
+                <i class="fas fa-info-circle"></i>
+                <span>¿Necesitas información extra?</span>
+            </a>
+        </div>
+    </main>
+
+    <div class="decorative-images">
+        <img src="{{ url_for('static', filename='images/img_deco1.jpeg') }}" alt="Imagen decorativa izquierda" class="decorative left">
+        <img src="{{ url_for('static', filename='images/img_deco2.jpeg') }}" alt="Imagen decorativa derecha" class="decorative right">
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Museo Nacional de Arte. Todos los derechos reservados.</p>
+        <p>Desarrollado por el equipo de IA ESCOM.</p>
+    </footer>
+
+</body>
+</html>

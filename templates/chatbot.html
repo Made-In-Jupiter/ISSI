@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot - Asistente del Museo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo-museo.png') }}" alt="Logo del Museo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/" >INICIO</a></li>
+                    <li><a href="/info" >INFORMES</a></li>
+                    <li><a href="/qr" >QR</a></li> 
+                    <li><a href="https://munal.mx/es/exposiciones">EXPOSICIONES</a></li>
+                    <li><a href="https://munal.mx/es">EL MUSEO</a></li>
+
+                </ul>
+            </nav>
+            <div class="social-icons">
+                <a href="https://www.youtube.com/watch?v=Hyc9JHUsp9E" target="_blank" aria-label="Canal de YouTube del Museo"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/munal.inba/" target="_blank" aria-label="Página de Facebook del Museo"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/munalmx/" target="_blank" aria-label="Perfil de Instagram del Museo"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/munalmx?s=21" target="_blank" aria-label="Perfil de Twitter del Museo"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="chatbot-main-content"> <h1 class="chatbot-title">Asistente del Museo</h1>
+        
+        <div id="chatbox" class="chat-container">
+            <div class="message bot">Hola 👋 Soy el asistente virtual del Museo. ¿En qué puedo ayudarte hoy?</div>
+        </div>
+        
+        <div class="chat-input-area">
+            <input type="text" id="userInput" class="chat-input" placeholder="Escribe tu pregunta aquí...">
+            <button onclick="sendMessage()" class="chat-send-button"><i class="fas fa-paper-plane"></i> Enviar</button>
+        </div>
+    </main>
+
+    <script>
+    async function sendMessage() {
+        const input = document.getElementById("userInput");
+        const chatbox = document.getElementById("chatbox");
+        const userText = input.value.trim();
+
+        if (userText === "") return;
+
+        // Mostrar mensaje del usuario
+        const userMessage = document.createElement("div");
+        userMessage.className = "message user";
+        userMessage.textContent = userText;
+        chatbox.appendChild(userMessage);
+        chatbox.scrollTop = chatbox.scrollHeight;
+        input.value = "";
+
+        // Esperar respuesta del servidor
+        try {
+            const response = await fetch("/respuesta", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mensaje: userText })
+            });
+
+            const data = await response.json();
+            const botMessage = document.createElement("div");
+            botMessage.className = "message bot";
+            botMessage.textContent = data.respuesta;
+            chatbox.appendChild(botMessage);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        } catch (error) {
+            const errorMsg = document.createElement("div");
+            errorMsg.className = "message bot";
+            errorMsg.textContent = "Hubo un error al conectar con el asistente.";
+            chatbox.appendChild(errorMsg);
+        }
+    }
+
+    // También activar Enter
+    document.getElementById("userInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            sendMessage();
+        }
+    });
+    </script>
+
+</body>
+</html>

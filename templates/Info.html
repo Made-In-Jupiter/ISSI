@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información del Museo - Museo Nacional de Antropología</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo-museo.png') }}" alt="Logo del Museo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/" >INICIO</a></li>
+                    <li><a href="/chatbot" >CHAT BOT</a></li>  
+                    <li><a href="/qr" >QR</a></li>                
+                    <li><a href="https://munal.mx/es/exposiciones">EXPOSICIONES</a></li>
+                    <li><a href="https://munal.mx/es">EL MUSEO</a></li>
+
+                </ul>
+            </nav>
+            <div class="social-icons">
+                <a href="https://www.youtube.com/watch?v=Hyc9JHUsp9E" target="_blank" aria-label="Canal de YouTube del Museo"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/munal.inba/" target="_blank" aria-label="Página de Facebook del Museo"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/munalmx/" target="_blank" aria-label="Perfil de Instagram del Museo"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/munalmx?s=21" target="_blank" aria-label="Perfil de Twitter del Museo"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="info-main-content">
+        
+        <section class="museum-intro-section">
+            <div class="intro-content-wrapper">
+                <div class="intro-text">
+                    <h2 class="section-title">Descubre el Museo Nacional de Antropología</h2>
+                    <p>El Museo Nacional de Arte (MUNAL), es una institución dedicada a la preservación y difusión del arte mexicano desde el siglo XVI hasta mediados del siglo XX. Su colección permanente abarca más de 3,000 obras, organizadas en tres grandes periodos históricos: la época virreinal (1550–1821), el siglo XIX y el periodo posrevolucionario hasta los años 1950. Entre los artistas representados se encuentran figuras emblemáticas como José María Velasco, Diego Rivera, Frida Kahlo y David Alfaro Siqueiro.</p>
+                    <p>Se ubica en un edificio emblemático del porfiriato: el antiguo Palacio de la Secretaría de Comunicaciones y Obras Públicas, construido entre 1904 y 1911 con un diseño neoclásico y ecléctico a cargo del arquitecto italiano Silvio Contri. Este majestuoso inmueble fue restaurado y adaptado como museo en el año 2000, convirtiéndose en uno de los recintos culturales más importantes del país. El MUNAL no solo resguarda valiosas obras de arte, sino que también representa una pieza arquitectónica clave para entender la historia urbana y política de la Ciudad de México a principios del siglo XX. Su arquitectura, con grandes escalinatas, vitrales y salones ornamentados, ofrece a los visitantes una experiencia que combina arte, historia y patrimonio nacional.</p>
+                
+                </div>
+                <div class="intro-image">
+                    <img src="{{ url_for('static', filename='images/info.jpeg') }}" alt="Fachada del Museo Nacional de Antropología" class="museum-promo-image">
+                </div>
+            </div>
+        </section>
+        <div class="image-carousel">
+            <div class="carousel-track">
+                <img src="{{ url_for('static', filename='images/img-inf1.jpeg') }}" alt="Galería del museo 1" class="carousel-image">
+                <img src="{{ url_for('static', filename='images/img-inf2.jpeg') }}" alt="Galería del museo 2" class="carousel-image">
+                <img src="{{ url_for('static', filename='images/img-inf3.jpeg') }}" alt="Galería del museo 3" class="carousel-image">
+                <img src="{{ url_for('static', filename='images/img-inf4.jpeg') }}" alt="Galería del museo 4" class="carousel-image">
+                <img src="{{ url_for('static', filename='images/img-inf5.jpeg') }}" alt="Galería del museo 1" class="carousel-image">
+                <img src="{{ url_for('static', filename='images/img-inf6.jpeg') }}" alt="Galería del museo 2" class="carousel-image">
+                <img src="{{ url_for('static', filename='images/img-inf7.jpeg') }}" alt="Galería del museo 3" class="carousel-image">
+                <img src="{{ url_for('static', filename='images/img-inf8.jpeg') }}" alt="Galería del museo 4" class="carousel-image">
+            </div>
+        </div>
+
+        <section class="museum-info-section">
+            <div class="info-block">
+                <h2 class="info-subtitle"><i class="fas fa-map-marker-alt"></i> Ubicación</h2>
+                <p>Tacuba 8, Centro Histórico, 06010 Ciudad de México, CDMX</p>
+                <p></p>
+                <p></p>
+                <h2 class="info-subtitle"><i class="fas fa-clock"></i> Horarios</h2>
+                <p> Martes a domingo, de 10:00 a 18:00 h</p>
+                <p> Último acceso a las 17:30 h</p>
+                <p> Cerrado los días 1° de enero y 25 de diciembre</p>
+                <p>Lunes: Cerrado</p>
+            </div>
+            
+            <div class="info-block">
+                <h2 class="info-subtitle"><i class="fas fa-ticket-alt"></i> Costos</h2>
+                <p>
+                Admisión general: $95.00
+                <p>Entrada gratuita: menores de 13 años, personas con discapacidad, estudiantes, maestros y adultos mayores presentando credencial vigente, aplica únicamente para nacionales</p>
+                <p>ICOM 50% de descuento</p>
+                <p>$5.00 permiso para toma de fotografías (sin flash y sin tripié; no se permiten sesiones fotográficas)</p>
+                <p>$30.00 permiso para toma de video (sin tripié y sin iluminación; no se permiten sesiones de grabación personal)</p>
+            </div>
+        </section>
+
+        <section class="museum-map-section">
+            <h2 class="info-subtitle"><i class="fas fa-map"></i> Mapa</h2>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.448923413703!2d-99.13939549999999!3d19.436202299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d200248453f8d1%3A0x5e67451bc487b600!2sMuseo%20Nacional%20De%20Arte%20(MUNAL)!5e0!3m2!1ses-419!2smx!4v1748228392694!5m2!1ses-419!2smx"
+                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2025 Museo Nacional de Arte. Todos los derechos reservados.</p>
+        <p>Desarrollado por el equipo de IA ESCOM.</p>
+    </footer>
+</body>
+</html>
